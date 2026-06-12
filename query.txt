@@ -1,0 +1,138 @@
+1. Find all movies
+- Query: db.movies.find()
+
+2. Find first movie document
+- Query: db.movies.findOne()
+
+3. Find movies released after 2000
+-Query: db.movies.find({year: {$gt: 2000}})
+
+4. Find movies released before 1990
+- Query: db.movies.find({year: {$lt: 1990}})
+
+5. Find movies with runtime greater than 120
+- Query: db.movies.find({runtime: {$gt: 120}})
+
+6. Find movies with runtime less than 90
+- Query: db.movies.find({runtime: {$lt: 90}})
+
+7. Find movies with genre Drama
+- Query: db.movies.find({genres: "Drama"})
+
+8. Find movies with genre Comedy
+- Query: db.movies.find({genres: "Comedy"})
+
+9. Find movies with imdb rating greater than 8
+- Query: db.movies.find({"imdb.rating": {$gt: 8}})
+
+10. Count total movies
+- Query: db.movies.countDocuments()
+
+11. Find comments by a specific user
+- Query: db.comments.find({username: "user1"})
+
+12. Find movies from a specific country
+- Query: db.movies.find({country: "USA"})
+
+13. Find movies in specific language
+- Query: db.movies.find({language: "English"})
+
+14. Find theaters in a city
+- Query: db.theaters.find({"location.address.city": "New York"}).count()
+
+15. Find movies released in a specific year
+- Query: db.movies.find({year: 2022})
+
+16. Find movies between two years
+- Query: db.movies.find({year: {$gte: 2000, $lte: 2022}})
+
+17. Find movies with runtime between two values
+- Query: db.movies.find({runtime: {$gte: 120, $lte: 180}})
+
+18. Find movies with rating > X and runtime > Y
+- Query: db.movies.find({rating: {$gt: 8}, runtime: {$gt: 120}})
+
+19. Find movies having Drama and Comedy genres
+- Query: db.movies.find({genres: "Drama", genres: "Comedy"})
+
+20. Find movies with missing poster field
+- Query: db.movies.find({poster: null})
+
+21. Find movies where awards.wins > 5
+- Query: db.movies.find({"awards.wins": {$gt: 5}})
+
+22. Return only title and year fields
+- Query: db.movies.find({}, {title: 1, year: 1})
+
+23. Sort movies by year ascending
+- Query: db.movies.find().sort({year: 1})
+
+24. Sort movies by year descending
+- Query: db.movies.find().sort({year: -1})
+
+25. Return top 10 newest movies
+- Query: db.movies.find().sort({year: -1}).limit(10)
+
+26. Return first 20 movies
+- Query: db.movies.find().limit(20)
+
+27. Skip first 20 movies and return next 20
+- Query: db.movies.find().skip(20).limit(20)
+
+28. Update movie runtime
+- Query: db.movies.updateOne({title: "The Godfather"}, {$set: {runtime: 175}})
+
+29. Update movie title
+- Query: db.movies.updateOne({title: "The Godfather"}, {$set: {title: "The Godfather 2"}})
+
+30. Add new field into document
+- Query: db.movies.updateOne({title: "The Godfather"}, {$set: {newField: "newValue"}})
+
+31. Increase numeric field using increment
+- Query: db.movies.updateOne({title: "The Godfather"}, {$inc: {runtime: 10}})
+
+32. Remove field from document
+- Query: db.movies.updateOne({title: "The Godfather"}, {$unset: {newField: ""}})
+
+33. Delete one comment
+- Query: db.comments.deleteOne({_id: "commentId"})
+
+34. Delete multiple comments
+- Query: db.comments.deleteMany({username: "user1"})
+
+35. Insert one movie document
+- Query: db.movies.insertOne({title: "The Godfather", year: 1972, runtime: 175, genres: ["Drama", "Crime"], imdb: {rating: 9.2}, awards: {wins: 3, nominations: 6}})
+
+36. Insert multiple movie documents
+- Query: db.movies.insertMany([
+  {title: "The Godfather", year: 1972, runtime: 175, genres: ["Drama", "Crime"], imdb: {rating: 9.2}, awards: {wins: 3, nominations: 6}},
+  {title: "The Godfather: Part II", year: 1974, runtime: 200, genres: ["Drama", "Crime"], imdb: {rating: 9.0}, awards: {wins: 6, nominations: 4}}
+])
+
+37. Find movies using regex on title
+- Query: db.movies.find({title: /The Godfather/i})
+
+38. Find movies where cast contains actor name
+- Query: db.movies.find({cast: "Marlon Brando"})
+
+39. Find movies with more than one country
+- Query:db.movies.find({$expr: {$gt: [{ $size: "$countries" }, 1]}})
+
+40. Find movies having at least 3 genres
+- Query: db.movies.findOne({genres : {$size : 3}})
+
+41. Find documents using OR condition
+- Query: db.movies.find({$or: [{year: 2022}, {year: 2023}]})
+
+42. Find documents using AND condition
+- Query: db.movies.find({$and: [{year: 2022}, {year: 2023}]})
+
+43. Find movies with specific language and genre
+- Query: db.movies.find({languages: "English", genres: "Drama"})
+
+44. Add item into array using push
+- Query: db.movies.updateOne({title: "The Godfather"}, {$push: {genres: "Action"}})
+
+45. Remove item from array using pull
+- Query: db.movies.updateOne({title: "The Godfather"}, {$pull: {genres: "Action"}})
+ 
